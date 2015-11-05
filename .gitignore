@@ -1,6 +1,7 @@
-!*.zip
-!*.rar
-!*.via
-!*.tmp
-!*.err
-!*.class
+*.zip
+*.rar
+*.via
+*.tmp
+*.err
+*.class
+/bin/
