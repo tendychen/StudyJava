@@ -6,6 +6,10 @@ public class LiftOff implements Runnable {
     private static int taskCount = 0;
     private final int id = taskCount++;
 
+    public LiftOff() {
+	this.countDown = 10;
+    }
+    
     public LiftOff(int countDown) {
 	this.countDown = countDown;
     }
