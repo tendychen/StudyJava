@@ -4,6 +4,7 @@ package com.study.util.concurrency;
 import java.util.concurrent.*;
 import java.util.*;
 
+
 class Count {
     private int count = 0;
     private Random rand = new Random(47);
@@ -11,8 +12,9 @@ class Count {
     // Remove the synchronized keyword to see counting fail:
     public synchronized int increment() {
 	int temp = count;
-	if (rand.nextBoolean()) // Yield half the time
+	if (rand.nextBoolean()) {// Yield half the time
 	    Thread.yield();
+	}
 	return (count = ++temp);
     }
 
@@ -79,14 +81,16 @@ class Entrance implements Runnable {
 public class OrnamentalGarden {
     public static void main(String[] args) throws Exception {
 	ExecutorService exec = Executors.newCachedThreadPool();
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < 5; i++) {
 	    exec.execute(new Entrance(i));
+	}
 	// Run for a while, then stop and collect the data:
 	TimeUnit.SECONDS.sleep(3);
 	Entrance.cancel();
 	exec.shutdown();
-	if (!exec.awaitTermination(250, TimeUnit.MILLISECONDS))
+	if (!exec.awaitTermination(250, TimeUnit.MILLISECONDS)) {
 	    System.out.println("Some tasks were not terminated!");
+	}
 	System.out.println("Total: " + Entrance.getTotalCount());
 	System.out.println("Sum of Entrances: " + Entrance.sumEntrances());
     }
